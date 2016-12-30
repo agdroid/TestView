@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button_visible).setOnClickListener(mGlobal_OnClickListener);
         findViewById(R.id.button_gone).setOnClickListener(mGlobal_OnClickListener);
         findViewById(R.id.button_recyclerview).setOnClickListener(mGlobal_OnClickListener);
+
     }
 
     //Global On click listener for all views
