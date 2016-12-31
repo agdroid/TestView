@@ -2,6 +2,7 @@ package com.example.andre.testview.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import java.util.List;
  */
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+    private static final String TAG = "MyAdapter";
+
     private List<ListItem> mList;
     private LayoutInflater mLayoutInflater;
     private Context mContext; // Store the context for easy access
@@ -55,8 +58,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
+        View v;
+        v = holder.container.findViewById(R.id.undo);
+        String vi = "nicht zugewiesen";
+        switch  (v.getVisibility()) {
+            case 0 :  vi = "View.VISIBLE";  break;
+            case 8 :  vi = "View.GONE";     break;
+        }
         ListItem item = mList.get(position);
         holder.title.setText(item.getTitle());
+
+        Log.d(TAG, "Element " + position + " set. -> Title=" + item.getTitle() + " -> Visibility = " + vi);
     }
 
     @Override

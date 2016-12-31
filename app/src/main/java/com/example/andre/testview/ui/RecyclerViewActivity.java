@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import com.example.andre.testview.model.DummyData;
 import java.util.List;
 
 public class RecyclerViewActivity extends AppCompatActivity {
+    private static final String TAG = "RecyclerViewActivity";
 
     private RecyclerView mRecyclerView;
     private MyAdapter mMyAdpater;
@@ -51,6 +53,18 @@ public class RecyclerViewActivity extends AppCompatActivity {
             @Override
             public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
                 final View undo = viewHolder.itemView.findViewById(R.id.undo);
+
+                //Start: block for debug
+                int p = viewHolder.getAdapterPosition();
+                String vi = "nicht zugewiesen";
+                switch  (undo.getVisibility()) {
+                    case 0 :  vi = "View.VISIBLE";  break;
+                    case 8 :  vi = "View.GONE";     break;
+                }
+                Log.d(TAG, "BEGINN onSwiped(): Pos=" + p + " -> direction=" + direction + " -> Visibility = " + vi);
+                //End: block for debug
+
+
                 if (undo != null) {
                     TextView text_loeschen = (TextView) viewHolder.itemView.findViewById(R.id.undo_loeschen);
                     text_loeschen.setOnClickListener(new View.OnClickListener() {
@@ -65,13 +79,27 @@ public class RecyclerViewActivity extends AppCompatActivity {
                     text_rueckgaengig.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            mRecyclerView.getAdapter().notifyItemChanged(viewHolder.getAdapterPosition());
-                            clearView(mRecyclerView, viewHolder);
                             undo.setVisibility(View.GONE);
+                            clearView(mRecyclerView, viewHolder);
+                            mRecyclerView.getAdapter().notifyItemChanged(viewHolder.getAdapterPosition());
                         }
                     });
 
                     undo.setVisibility(View.VISIBLE);
+
+                    //Start: block for debug
+                    int p2 = viewHolder.getAdapterPosition();
+                    String vi2 = "nicht zugewiesen";
+                    switch  (undo.getVisibility()) {
+                        case 0 :  vi2 = "View.VISIBLE";  break;
+                        case 8 :  vi2 = "View.GONE";     break;
+                    }
+                    Log.d(TAG, "END onSwiped(): Pos=" + p2 + " -> direction=" + direction + " -> Visibility = " + vi2);
+                    //End: block for debug
+
+                    //Sonst wird Wechsel der Sichtbarkeit nicht angezeigt
+                    clearView(mRecyclerView, viewHolder);
+                    //mRecyclerView.getAdapter().notifyItemChanged(viewHolder.getAdapterPosition());
 
                     //Hier automatisches Löschen nach xx Sekunden einbauen
 
