@@ -33,7 +33,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return mContext;
     }
 
-
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView title;
         private View container;
@@ -48,20 +47,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         }
     }
 
-
     @Override
     public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mLayoutInflater.inflate(R.layout.row_layout2, parent, false);
         return new MyViewHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         ListItem item = mList.get(position);
         holder.title.setText(item.getTitle());
     }
-
 
     @Override
     public int getItemCount() {

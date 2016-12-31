@@ -60,10 +60,9 @@
         android:orientation="horizontal"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        
         android:visibility="gone">
         <TextView
-            android:id="@+id/undo_text"
+            android:id="@+id/undo_loeschen"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
@@ -71,7 +70,7 @@
             android:text="Löschen"
             android:textColor="@android:color/white"/>
         <TextView
-            android:id="@+id/undo_button"
+            android:id="@+id/undo_rueckgaengig"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
