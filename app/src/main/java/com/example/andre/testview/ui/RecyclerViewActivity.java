@@ -1,5 +1,6 @@
 package com.example.andre.testview.ui;
 
+import android.graphics.Canvas;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -44,6 +45,43 @@ public class RecyclerViewActivity extends AppCompatActivity {
     private ItemTouchHelper.Callback createHelperCallback() {
             ItemTouchHelper.SimpleCallback simpleItemTouchCallback =
                     new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+                       //Stackoverflow Use ItemTouchHelper for Swipe-To-Dismiss with another View displayed behind the swiped out
+ /*    TODO: Die nächsten Zeilen müssen wieder raus
+
+                        //Besser raus. Die movementFlags können bleicben wie sie sind
+                        @Override
+                        public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                            if (viewHolder instanceof MyAdapter.MyViewHolder) {
+                                int swipeFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+                                return makeMovementFlags(0, swipeFlags);
+                            } else {
+                                return 0;
+                            }
+                         }
+
+                        @Override
+                        public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                            getDefaultUIUtil().clearView(((MyAdapter.MyViewHolder) viewHolder).getUndoView());
+                        }
+
+                        @Override
+                        public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
+                            if (viewHolder != null) {
+                                getDefaultUIUtil().onSelected(((MyAdapter.MyViewHolder) viewHolder).getUndoView());
+                            }
+                        }
+
+                        @Override
+                        public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                            getDefaultUIUtil().onDraw(c, recyclerView, ((MyAdapter.MyViewHolder) viewHolder).getUndoView(), dX, dY,    actionState, isCurrentlyActive);
+                        }
+
+                        @Override
+                        public void onChildDrawOver(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                            getDefaultUIUtil().onDrawOver(c, recyclerView, ((MyAdapter.MyViewHolder) viewHolder).getUndoView(), dX, dY,    actionState, isCurrentlyActive);
+                        }
+*/
 
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {

@@ -12,7 +12,7 @@ public class DummyData {
   public static List<ListItem> getListData() {
       List<ListItem> data = new ArrayList<ListItem>();
 
-      for (int i = 0; i < 20; i++) {
+      for (int i = 0; i < 80; i++) {
           ListItem item = new ListItem();
           item.setTitle("Zeile " + i);
           data.add(item);

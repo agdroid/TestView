@@ -39,6 +39,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView title;
         private View container;
+        private View mUndoView;
 
         //Konstruktor des ViewHolder
         public MyViewHolder(View itemView) {
@@ -47,6 +48,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             title = (TextView) itemView.findViewById(R.id.tv_title);
             //We'll need the container later on, when we add an View.OnClickListener
             container = itemView.findViewById(R.id.container_item_root2);
+            mUndoView = itemView.findViewById(R.id.undo);
+        }
+
+        //Stackoverflow Use ItemTouchHelper for Swipe-To-Dismiss with another View displayed behind the swiped out
+        public View getUndoView() {
+            return mUndoView;
         }
     }
 
@@ -59,6 +66,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         View v;
+        //Hier könnte der Fehler liegen
+        //Grund: Es muss jedes mal die Original-View (XML-Datei) gelsen werden.
+        //Durch den Verweis auf den Container bleibt offensichtlich immer der letzte View-Status
+        // (GONE oder VISIBLE) erhalten
         v = holder.container.findViewById(R.id.undo);
         String vi = "nicht zugewiesen";
         switch  (v.getVisibility()) {
@@ -68,7 +79,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         ListItem item = mList.get(position);
         holder.title.setText(item.getTitle());
 
-        Log.d(TAG, "Element " + position + " set. -> Title=" + item.getTitle() + " -> Visibility = " + vi);
+        Log.d(TAG, "onBindViewHolder():Element " + position + " set. -> Title=" + item.getTitle() + " -> Visibility = " + vi);
     }
 
     @Override
